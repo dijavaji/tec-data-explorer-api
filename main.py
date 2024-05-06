@@ -9,21 +9,32 @@
 
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from routes import chat_routes, jwt_auth_users, users_db
+from routes.api import router
+#from routes import chat_routes, jwt_auth_users, users_db
 
-app = FastAPI()
+app = FastAPI(
+	debug=True,
+    title="DataExplorer",
+)
+
+#@app.on_event("startup")
+#def on_startup() -> None:
+
+	#print("Connected to the MongoDB database!")
 
 #routes
-app.include_router(chat_routes.router)
-app.include_router(jwt_auth_users.router)
+app.include_router(router)
+#cambio a archivo api.py
+#app.include_router(chat_routes.router)
+#app.include_router(jwt_auth_users.router)
 #app.include_router(users_db.router)
-app.mount("/static", StaticFiles(directory="static"), name="static")
+#app.mount("/static", StaticFiles(directory="static"), name="static")
 
 #url local http://127.0.0.1:8000/
 #http://localhost:8000/docs
 #http://localhost:8000/redoc
 @app.get("/messages")
-async def root():
+async def messages():
 	return "Now this finally works out. Welcome"
 
 

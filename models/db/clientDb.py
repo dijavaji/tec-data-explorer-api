@@ -1,6 +1,15 @@
 from pymongo import MongoClient
+import utils.dataExplorer_constant
 
-db_client = MongoClient("localhost", 27017)
+client = MongoClient(utils.dataExplorer_constant.DATABASE_URL)
+#db = client[utils.dataExplorer_constant.DATABASE_DB]
 
-db = db_client.desarrollo_db
-
+#@staticmethod
+def get_db() -> MongoClient:
+    try:
+        db = client[utils.dataExplorer_constant.DATABASE_DB]
+        return db
+    except:
+        print("Error de conexion db")
+    #finally:
+        #db.close()

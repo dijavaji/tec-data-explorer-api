@@ -2,12 +2,12 @@ from fastapi import APIRouter, HTTPException, status
 from models.chat_model import ChatOutput, ChatInput
 from service.chat_service import ChatService
 
-router = APIRouter(prefix="/api/v1/chat",
+router = APIRouter(prefix="/chat",
                    tags=["chat"],
-                   responses={404:{"message":"No encontrado"}})
+                   responses={status.HTTP_404_NOT_FOUND :{"message":"No encontrado"}})
 
 @router.post("/completions", status_code=status.HTTP_201_CREATED, response_model=ChatOutput)
-async def createCompletions(chatData : ChatInput):
+async def create_completions(chatData : ChatInput):
     _service = ChatService(chatData)
     return _service.create(chatData)
 
