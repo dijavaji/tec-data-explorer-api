@@ -23,3 +23,15 @@ class UserService:
     def getUser(self, id:str) -> UserOutput:
         return self.repository.search_user_by_field("_id", ObjectId(id))
 
+    def update(self, id:str, data: UserInput) -> UserInput:
+        user = self.repository.search_user_by_field("_id", ObjectId(id))
+        if not user:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with ID {id} not found")
+        return self.repository.update(id, data)
+
+    def delete(self, id:str):
+        found = self.repository.delete(id)
+        print("eliminado",found)
+        if not found:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with ID {id} not found")
+

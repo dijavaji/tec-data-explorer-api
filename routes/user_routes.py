@@ -25,8 +25,8 @@ async def getUser(id:str, session: MongoClient = Depends(get_db)):
     return _service.getUser(id)  #search_user("_id", ObjectId(id))
 
 
-@router.get("/") #query
-async def user(id:str):
+@router.get("/", status_code=200, response_model=UserOutput) #query
+async def user(id:str, session: MongoClient = Depends(get_db)):
     _service = UserService(session)
     return _service.getUser(id)  # search_user("_id", ObjectId(id))
 
@@ -36,33 +36,20 @@ async def createUser(data : UserInput, session: MongoClient = Depends(get_db)):
     print("ingreso a guardar")
     return _service.create(data)
 
-@router.put("/", response_model=User)
-async def updateUser(user : User):
-    user_dic = dict(user)
-    del user_dic["id"]
-    try:
-        db.users.find_one_and_replace({"_id": ObjectId(user.id)}, user_dic)
-    except:
-        return {"error": "No se a encontrado el usuario"}
-    return search_user("_id", ObjectId(user.id))
+@router.put("/{id}",response_description="Update a user", status_code=200,  response_model=UserInput)
+async def updateUser(id:str, data : UserInput, session: MongoClient = Depends(get_db)):
+    _service = UserService(session)
+    print("ingreso a actualizar usuario")
+    return _service.update(id, data)
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-async def deleteUser(id: str):
-    found = db.users.find_one_and_delete({"_id": ObjectId(id)})
-
-    if not found:
-        return {"error": "No se a eliminado el usuario"}
-
+async def deleteUser(id: str, session: MongoClient = Depends(get_db)):
+    _service = UserService(session)
+    print("ingreso a eliminar usuario")
+    _service.delete(id)
 
 
-def search_user(field:str, key):
-    try:
-        db = get_db()
-        print("ingreso a buscar usuario", db)
-        user = db.users.find_one({field: key})
-        return User(**user_schema(user))
-    except:
-        return {"error": "No se a encontrado el usuario"}
+
 
 
 
