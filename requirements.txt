@@ -5,4 +5,8 @@ python-dotenv
 passlib
 pymongo
 python-multipart
-deta
+#deta
+#utilizado ml
+langchain
+sentence_transformers
+langchain-community
