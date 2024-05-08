@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
-from models.chat_model import ChatOutput, ChatInput
+from schemas.chat_schemas import ChatOutput, ChatInput
 from service.chat_service import ChatService
 
 router = APIRouter(prefix="/chat",

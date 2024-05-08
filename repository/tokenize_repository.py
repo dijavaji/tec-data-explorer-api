@@ -3,6 +3,7 @@
 from models.tokenize import Tokenize
 from schemas.tokenize_schema import TokenizeInput, TokenizeOutput
 from langchain_community.embeddings import HuggingFaceEmbeddings
+from utils.dataExplorer_constant import APP_MULTI_PROCESS
 
 class TokenizeRepository:
     def __init__(self):
@@ -10,14 +11,20 @@ class TokenizeRepository:
 
     def create_tokenize(self, data: TokenizeInput) -> TokenizeOutput:
         #self.users.append(user)
-        model_name = "sentence-transformers/"+data.model
+        if data.model is None or data.model == " ":
+            model = "all-mpnet-base-v2"
+        else:
+            model = data.model
+        model_name = "sentence-transformers/"+model
         model_kwargs = {'device': 'cpu'}
         encode_kwargs = {'normalize_embeddings': False}
+        multi_process = APP_MULTI_PROCESS
         #embeddings = HuggingFaceEmbeddings() # por defecto utilza el modelo all-mpnet-base-v2
         hf = HuggingFaceEmbeddings(
             model_name=model_name,
             model_kwargs=model_kwargs,
-            encode_kwargs=encode_kwargs
+            encode_kwargs=encode_kwargs,
+            multi_process=multi_process
         )
         query_result = hf.embed_query(data.text)
         print(query_result[:3])

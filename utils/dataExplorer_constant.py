@@ -8,3 +8,7 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 DATABASE_URL = os.getenv('BBDD_MONGO_URI')
 DATABASE_DB = os.getenv('BBDD_MONGO_DB')
+
+#Run encode() on multiple GPUs.
+APP_MULTI_PROCESS = os.getenv('DATA_EXPLORER_MULTI_PROCESS')
+

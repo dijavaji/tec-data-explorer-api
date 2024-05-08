@@ -11,21 +11,3 @@ class Chat(BaseModel):
     max_tokens: int
     top_p: float
     stream: bool
-
-class ChatInput(BaseModel):
-    model: str = Field(min_length=1, max_length=120)
-    temperature: float
-    messages: List[Message]
-    max_tokens: int
-    top_p: float
-    stream: bool
-
-
-class ChatOutput(BaseModel):
-    id: UUID4
-    model: str
-    temperature: float
-    messages: List[Message]
-    max_tokens: int
-    top_p: float
-    stream: bool
