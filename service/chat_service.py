@@ -10,7 +10,7 @@ class ChatService:
     def create(self, data: ChatInput) -> ChatOutput:
         #if self.repository.chat_exists_by_name(data.name):
             #raise HTTPException(status_code=400, detail="Region already exists")
-        print("ingreso servicio chat")
+        print("ingreso servicio chat: ", data.model)
         if(data.model == 'spacy'):
             chate = spacy_service.create_completions(data)
         else:

@@ -12,10 +12,10 @@ class TokenizeRepository:
     def create_tokenize(self, data: TokenizeInput) -> TokenizeOutput:
         #self.users.append(user)
         if data.model is None or data.model == " ":
-            model = "all-mpnet-base-v2"
+            model = "sentence-transformers/all-mpnet-base-v2"
         else:
             model = data.model
-        model_name = "sentence-transformers/"+model
+        model_name = model
         model_kwargs = {'device': 'cpu'}
         encode_kwargs = {'normalize_embeddings': False}
         multi_process = APP_MULTI_PROCESS

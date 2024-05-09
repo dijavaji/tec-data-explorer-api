@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional, List
 class TokenizeInput(BaseModel):
-    model: str = Field(min_length=1, max_length=32)
+    model: str = Field(min_length=1, max_length=128)
     text: str
 
 class TokenizeOutput(BaseModel):
