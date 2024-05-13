@@ -1,15 +1,16 @@
 #pip install langchain sentence_transformers
 #pip install -U langchain-community
-from models.tokenize import Tokenize
-from schemas.tokenize_schema import TokenizeInput, TokenizeOutput
+import uuid
+from models.token import Token
+from schemas.embed_schema import EmbedInput, EmbedOutput
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from utils.dataExplorer_constant import APP_MULTI_PROCESS
 
-class TokenizeRepository:
+class EmbedRepository:
     def __init__(self):
         self.users = []
 
-    def create_tokenize(self, data: TokenizeInput) -> TokenizeOutput:
+    def create_embed(self, data: EmbedInput) -> EmbedOutput:
         #self.users.append(user)
         if data.model is None or data.model == " ":
             model = "sentence-transformers/all-mpnet-base-v2"
@@ -29,6 +30,8 @@ class TokenizeRepository:
         query_result = hf.embed_query(data.text)
         print(query_result[:3])
         #doc_result = embeddings.embed_documents([text])
-        return TokenizeOutput(tokens= query_result, token_strings= ["palabras"])
+        myuuid = uuid.uuid4()
+        token = Token(input_tokens=0, output_tokens=0)
+        return EmbedOutput(id = myuuid, embeddings= query_result, model=model, tokens=token)
 
-tokenize_repository = TokenizeRepository()
+embed_repository = EmbedRepository()

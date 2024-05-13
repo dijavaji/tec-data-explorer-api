@@ -1,3 +1,4 @@
+import uuid
 from typing import Optional, List
 from models.message_model import Message
 from schemas.chat_schemas import ChatOutput, ChatInput
