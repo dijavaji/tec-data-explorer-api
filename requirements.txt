@@ -10,3 +10,6 @@ python-multipart
 langchain
 sentence_transformers
 langchain-community
+nltk
+spacy
+#es_core_news_sm
