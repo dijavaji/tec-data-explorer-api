@@ -1,15 +1,14 @@
 #Python 3.10.11
-fastapi
-python-jose
-python-dotenv
-passlib
-pymongo
-python-multipart
+fastapi==0.111.0
+python-jose==3.3.0
+python-dotenv==1.0.1
+passlib==1.7.4
+pymongo==4.7.3
+python-multipart==0.0.9
 #deta
 #utilizado ml
-langchain
+langchain==0.2.10
 sentence_transformers
-langchain-community
-nltk
-spacy
-#es_core_news_sm
+langchain-community==0.2.10
+nltk==3.8.1
+spacy==3.7.5

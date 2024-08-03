@@ -3,7 +3,8 @@
 import uuid
 from models.token import Token
 from schemas.embed_schema import EmbedInput, EmbedOutput
-from langchain_community.embeddings import HuggingFaceEmbeddings
+#from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain.embeddings import HuggingFaceEmbeddings
 from utils.dataExplorer_constant import APP_MULTI_PROCESS
 
 class EmbedRepository:
@@ -19,13 +20,12 @@ class EmbedRepository:
         model_name = model
         model_kwargs = {'device': 'cpu'}
         encode_kwargs = {'normalize_embeddings': False}
-        multi_process = APP_MULTI_PROCESS
+       # multi_process = APP_MULTI_PROCESS
         #embeddings = HuggingFaceEmbeddings() # por defecto utilza el modelo all-mpnet-base-v2
         hf = HuggingFaceEmbeddings(
             model_name=model_name,
             model_kwargs=model_kwargs,
-            encode_kwargs=encode_kwargs,
-            multi_process=multi_process
+            encode_kwargs=encode_kwargs
         )
         query_result = hf.embed_query(data.text)
         print(query_result[:3])
