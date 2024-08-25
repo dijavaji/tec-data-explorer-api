@@ -15,7 +15,18 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
 	debug=True,
-    title="DataExplorer",
+    title="API REST Documentation for tec-dataExplorer-api, by technoloqie",
+    description="Servicios REST del microservicio publicados en formato JSON para el artefacto tec-dataExplorer-api",
+    terms_of_service="https://www.technoloqie.website/terms-of-service",
+    license_info={
+        "name": "Apache License",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+    },
+    servers=[
+        {"url": "http://127.0.0.1:8000", "description": "Generated server url"},
+        {"url": "https://prod.example.com", "description": "Production environment"},
+    ],
+
 )
 
 origins = [
