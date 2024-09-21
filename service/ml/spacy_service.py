@@ -20,7 +20,7 @@ class SpacyService:
 
     def __obtener_respuesta(self, messages, top_p) -> Message:
         # printing initial list of dictionary
-        print("initial_list", str(messages))
+        #print("initial_list", str(messages))
         # code to filter list where role is system or assistant
         question_answers = list(filter(lambda x: x.role == "system" or x.role == "assistant", messages))
 
