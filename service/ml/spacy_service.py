@@ -31,10 +31,13 @@ class SpacyService:
         cleaner = CleanerMlUtil()
         texto = cleaner.clean_words(texto)
         doc = self.nlp(texto)
+        #print("question_answers", question_answers)
         respuestas = convert_dict(question_answers)
-        # print(respuestas)
+        #print("respuestas****",respuestas.items())
+        print("pregunta user",doc)
         for pregunta in respuestas:
             if self.nlp(pregunta).similarity(doc) > top_p:
+                print("pregunta-----", str(pregunta))
                 msg_out = Message(role="assistant", content=respuestas[pregunta])
                 return msg_out
         return Message(role="assistant", content="no existe en corpus")

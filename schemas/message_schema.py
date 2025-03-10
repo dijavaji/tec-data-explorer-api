@@ -16,5 +16,12 @@ def convert_dict(messages):
     # print(messages[i].content, jsonable_encoder(messages[i+1]))
     # msg = jsonable_encoder(messages[i+1])
     # print(str(msg["content"]))
-    res_dct = {cleaner.clean_words(messages[i].content): messages[i + 1].content for i in range(0, len(messages)-1, 1)}
+    res_dct = {cleaner.clean_words(messages[i].content): messages[i + 1].content for i in range(0, len(messages)-1, 2)}
+    #lo mismo con for
+    #res_dct = {}
+    #for i in range(0,len(messages) - 1,2):
+        #key = cleaner.clean_words(messages[i].content)
+        #value = messages[i + 1].content
+        #res_dct[key] = value
+        #print("diccionarioxxx- ", key,value)
     return res_dct
